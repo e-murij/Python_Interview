@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Номер</th>
+        <th scope="col">Название</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Дата поступления</th>
+        <th scope="col">Единица измерения</th>
+        <th scope="col">Поставщик</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object_list %}
+        <tr>
+          <td>{{ object.id }}</td>
+          <td>{{ object.name }}</td>
+          <td>{{ object.price }}</td>
+          <td>{{ object.add_time }}</td>
+          <td>{{ object.measure }}</td>
+          <td>{{ object.provider }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-light">Добавить товар</button>
+
+{% endblock %}
