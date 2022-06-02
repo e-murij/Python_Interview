@@ -29,6 +29,20 @@ class Measure(models.Model):
         verbose_name_plural = "единицы измерения"
 
 
+class Section(models.Model):
+    name = models.CharField(
+        verbose_name='раздел',
+        max_length=128,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "pаздел"
+        verbose_name_plural = "pазделы"
+
+
 class Catalog(models.Model):
     name = models.CharField(
         verbose_name='название',
@@ -54,6 +68,12 @@ class Catalog(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         verbose_name='поставщик',
+    )
+    sections = models.ManyToManyField(
+        Section,
+        verbose_name='разделы',
+        null=True,
+        blank=True,
     )
 
     class Meta:
