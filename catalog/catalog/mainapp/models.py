@@ -1,4 +1,7 @@
+from django.contrib.sites.managers import CurrentSiteManager
+from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models import Manager
 
 
 class Provider(models.Model):
@@ -34,6 +37,13 @@ class Section(models.Model):
         verbose_name='раздел',
         max_length=128,
     )
+    site = models.ForeignKey(
+        Site,
+        on_delete=models.CASCADE,
+        null=True
+    )
+    objects = Manager()
+    on_site = CurrentSiteManager('site')
 
     def __str__(self):
         return self.name
@@ -75,6 +85,12 @@ class Catalog(models.Model):
         null=True,
         blank=True,
     )
+    site = models.ManyToManyField(
+        Site,
+        null=True
+    )
+    objects = Manager()
+    on_site = CurrentSiteManager('site')
 
     class Meta:
         verbose_name = "товар"
